@@ -1,5 +1,8 @@
 package com.aa03.index12306.framework.starter.convention.errorcode;
 
+/**
+ * 基础错误码定义
+ */
 public enum BaseErrorCode implements IErrorCode {
 
     // ========== 一级宏观错误码 客户端错误 ==========

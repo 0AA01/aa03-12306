@@ -5,6 +5,9 @@ import lombok.experimental.Accessors;
 
 import java.io.Serializable;
 
+/**
+ * 全局返回对象
+ */
 @Data
 @Accessors(chain = true)
 public class Result<T> implements Serializable {
@@ -14,7 +17,7 @@ public class Result<T> implements Serializable {
     /**
      * 正确返回码
      */
-    private final String SUCCESS_CODE = "0";
+    public final static String SUCCESS_CODE = "0";
 
     /**
      * 返回码
