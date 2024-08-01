@@ -1,6 +1,6 @@
 package com.aa03.index12306.biz.userservice.dao.entity;
 
-import com.aa03.index12306.framework.starter.database.base.BaseDo;
+import com.aa03.index12306.framework.starter.database.base.BaseDO;
 import com.baomidou.mybatisplus.annotation.TableName;
 import lombok.Data;
 
@@ -9,7 +9,7 @@ import lombok.Data;
  */
 @Data
 @TableName("t_user")
-public class UserDo extends BaseDo {
+public class UserDO extends BaseDO {
 
     /**
      * id

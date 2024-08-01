@@ -1,16 +1,17 @@
 package com.aa03.index12306.biz.userservice.controller;
 
+import com.aa03.index12306.biz.userservice.dto.res.UserRegisterReqDTO;
 import com.aa03.index12306.biz.userservice.dto.resp.UserQueryActualRespDTO;
 import com.aa03.index12306.biz.userservice.dto.resp.UserQueryRespDTO;
+import com.aa03.index12306.biz.userservice.dto.resp.UserRegisterRespDTO;
 import com.aa03.index12306.biz.userservice.service.UserLoginService;
 import com.aa03.index12306.biz.userservice.service.UserService;
 import com.aa03.index12306.framework.starter.convention.result.Result;
 import com.aa03.index12306.framework.starter.web.Results;
+import jakarta.validation.Valid;
 import jakarta.validation.constraints.NotEmpty;
 import lombok.RequiredArgsConstructor;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 /**
  * 用户信息控制层
@@ -39,7 +40,7 @@ public class UserInfoController {
     }
 
     /**
-     * 检查用户名是否已存在
+     * 检查用户名是否不存在
      */
     @GetMapping("/api/user-service/has-username")
     public Result<Boolean> hasUsername(@RequestParam("username") @NotEmpty String username) {
