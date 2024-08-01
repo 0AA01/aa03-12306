@@ -13,6 +13,7 @@ import org.springframework.validation.FieldError;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.RestControllerAdvice;
 
 import java.util.Optional;
 
@@ -20,7 +21,7 @@ import java.util.Optional;
  * 全局异常处理器
  */
 @Slf4j
-@RestController
+@RestControllerAdvice
 public class GlobalExceptionHandler {
 
     /**
@@ -40,6 +41,7 @@ public class GlobalExceptionHandler {
     /**
      * 拦截应用内抛出的异常
      */
+    @ExceptionHandler(value = {AbstractException.class})
     public Result abstractException(HttpServletRequest request, AbstractException ex) {
         if (ex.getCause() != null) {
             log.error("[{}] {} [ex] {}", request.getMethod(), request.getRequestURL().toString(), ex.toString(), ex.getCause());
