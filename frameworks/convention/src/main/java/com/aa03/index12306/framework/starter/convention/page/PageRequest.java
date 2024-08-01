@@ -1,8 +1,11 @@
 package com.aa03.index12306.framework.starter.convention.page;
 
+import lombok.Data;
+
 /**
  * 分页请求对象
  */
+@Data
 public class PageRequest {
 
     /**
