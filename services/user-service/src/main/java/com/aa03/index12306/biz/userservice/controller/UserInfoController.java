@@ -44,6 +44,14 @@ public class UserInfoController {
      */
     @GetMapping("/api/user-service/has-username")
     public Result<Boolean> hasUsername(@RequestParam("username") @NotEmpty String username) {
-        return Results.success(userLoginService.hasUsername(username));
+        return Results.success(userLoginService.hasNotUsername(username));
+    }
+
+    /**
+     * 注册用户
+     */
+    @PostMapping("/api/user-service/register")
+    public Result<UserRegisterRespDTO> register(@RequestBody @Valid UserRegisterReqDTO requestParam) {
+        return Results.success(userLoginService.register(requestParam));
     }
 }

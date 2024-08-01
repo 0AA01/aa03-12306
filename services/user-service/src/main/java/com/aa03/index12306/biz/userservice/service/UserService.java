@@ -1,6 +1,6 @@
 package com.aa03.index12306.biz.userservice.service;
 
-import com.aa03.index12306.biz.userservice.dao.entity.UserDo;
+import com.aa03.index12306.biz.userservice.dao.entity.UserDO;
 import com.aa03.index12306.biz.userservice.dto.resp.UserQueryActualRespDTO;
 import com.aa03.index12306.biz.userservice.dto.resp.UserQueryRespDTO;
 import com.baomidou.mybatisplus.extension.service.IService;
@@ -8,7 +8,7 @@ import com.baomidou.mybatisplus.extension.service.IService;
 /**
  * 用户信息接口层
  */
-public interface UserService extends IService<UserDo> {
+public interface UserService extends IService<UserDO> {
 
     /**
      * 根据用户名查询用户信息
