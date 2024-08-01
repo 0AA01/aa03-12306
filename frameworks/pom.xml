@@ -23,6 +23,7 @@
         <module>log</module>
         <module>bizs</module>
         <module>designpattern</module>
+        <module>idempotent</module>
     </modules>
 
     <properties>
