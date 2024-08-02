@@ -1,6 +1,7 @@
 package com.aa03.index12306.biz.userservice.controller;
 
 import com.aa03.index12306.biz.userservice.dto.res.UserRegisterReqDTO;
+import com.aa03.index12306.biz.userservice.dto.res.UserUpdateReqDTO;
 import com.aa03.index12306.biz.userservice.dto.resp.UserQueryActualRespDTO;
 import com.aa03.index12306.biz.userservice.dto.resp.UserQueryRespDTO;
 import com.aa03.index12306.biz.userservice.dto.resp.UserRegisterRespDTO;
@@ -53,5 +54,14 @@ public class UserInfoController {
     @PostMapping("/api/user-service/register")
     public Result<UserRegisterRespDTO> register(@RequestBody @Valid UserRegisterReqDTO requestParam) {
         return Results.success(userLoginService.register(requestParam));
+    }
+
+    /**
+     * 修改用户
+     */
+    @PostMapping("/api/user-service/update")
+    public Result<Void> update(@RequestBody @Valid UserUpdateReqDTO requestParam) {
+        userService.update(requestParam);
+        return Results.success();
     }
 }

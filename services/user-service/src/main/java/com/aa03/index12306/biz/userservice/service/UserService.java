@@ -1,6 +1,7 @@
 package com.aa03.index12306.biz.userservice.service;
 
 import com.aa03.index12306.biz.userservice.dao.entity.UserDO;
+import com.aa03.index12306.biz.userservice.dto.res.UserUpdateReqDTO;
 import com.aa03.index12306.biz.userservice.dto.resp.UserQueryActualRespDTO;
 import com.aa03.index12306.biz.userservice.dto.resp.UserQueryRespDTO;
 import com.baomidou.mybatisplus.extension.service.IService;
@@ -34,4 +35,11 @@ public interface UserService extends IService<UserDO> {
      * @return 注销次数
      */
     Integer queryUserDeletionNum(Integer idType, String idCard);
+
+    /**
+     * 根据用户ID修改用户信息
+     *
+     * @param requestParam 修改用户信息请求参数
+     */
+    void update(UserUpdateReqDTO requestParam);
 }
