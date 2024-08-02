@@ -49,4 +49,11 @@ public interface UserLoginService {
      * @return 用户是否登录返回结果
      */
     UserLoginRespDTO checkLogin(String accessToken);
+
+    /**
+     * 用户退出登录
+     *
+     * @param accessToken 用户登录 Token 凭证
+     */
+    void logout(String accessToken);
 }

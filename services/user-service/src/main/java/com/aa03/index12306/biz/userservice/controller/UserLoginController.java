@@ -33,4 +33,12 @@ public class UserLoginController {
         UserLoginRespDTO result = userLoginService.checkLogin(accessToken);
         return Results.success(result);
     }
+
+    /**
+     * 用户退出登录
+     */
+    public Result<Void> logout(@RequestParam(required = false) String accessToken) {
+        userLoginService.logout(accessToken);
+        return Results.success();
+    }
 }
