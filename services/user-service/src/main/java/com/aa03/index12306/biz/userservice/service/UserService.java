@@ -37,7 +37,7 @@ public interface UserService extends IService<UserDO> {
     Integer queryUserDeletionNum(Integer idType, String idCard);
 
     /**
-     * 根据用户ID修改用户信息
+     * 根据用户名修改用户信息
      *
      * @param requestParam 修改用户信息请求参数
      */
