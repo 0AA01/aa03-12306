@@ -1,7 +1,9 @@
 package com.aa03.index12306.biz.userservice.service;
 
 import com.aa03.index12306.biz.userservice.dto.res.UserDeletionReqDTO;
+import com.aa03.index12306.biz.userservice.dto.res.UserLoginReqDTO;
 import com.aa03.index12306.biz.userservice.dto.res.UserRegisterReqDTO;
+import com.aa03.index12306.biz.userservice.dto.resp.UserLoginRespDTO;
 import com.aa03.index12306.biz.userservice.dto.resp.UserRegisterRespDTO;
 
 /**
@@ -31,4 +33,12 @@ public interface UserLoginService {
      * @param requestParam 注销用户入参
      */
     void deletion(UserDeletionReqDTO requestParam);
+
+    /**
+     * 用户登录接口
+     *
+     * @param requestParam 用户登录入参
+     * @return 用户登录返回结果
+     */
+    UserLoginRespDTO login(UserLoginReqDTO requestParam);
 }
