@@ -820,3 +820,292 @@ CREATE TABLE `t_user_reuse`
     PRIMARY KEY (`id`),
     KEY           `idx_username` (`username`) USING BTREE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci COMMENT='用户名复用表';
+
+
+CREATE TABLE `t_passenger_0`
+(
+    `id`            bigint(20) unsigned NOT NULL AUTO_INCREMENT COMMENT 'ID',
+    `username`      varchar(256) COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT '用户名',
+    `real_name`     varchar(128) COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT '真实姓名',
+    `id_type`       int(3) DEFAULT NULL COMMENT '证件类型',
+    `id_card`       varchar(256) COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT '证件号码',
+    `discount_type` int(3) DEFAULT NULL COMMENT '优惠类型',
+    `phone`         varchar(128) COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT '手机号',
+    `create_date`   datetime                                DEFAULT NULL COMMENT '添加日期',
+    `verify_status` int(3) DEFAULT NULL COMMENT '审核状态',
+    `create_time`   datetime                                DEFAULT NULL COMMENT '创建时间',
+    `update_time`   datetime                                DEFAULT NULL COMMENT '修改时间',
+    `del_flag`      tinyint(1) DEFAULT NULL COMMENT '删除标识',
+    PRIMARY KEY (`id`),
+    KEY             `idx_id_card` (`id_card`) USING BTREE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci COMMENT='乘车人表';
+
+CREATE TABLE `t_passenger_1`
+(
+    `id`            bigint(20) unsigned NOT NULL AUTO_INCREMENT COMMENT 'ID',
+    `username`      varchar(256) COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT '用户名',
+    `real_name`     varchar(128) COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT '真实姓名',
+    `id_type`       int(3) DEFAULT NULL COMMENT '证件类型',
+    `id_card`       varchar(256) COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT '证件号码',
+    `discount_type` int(3) DEFAULT NULL COMMENT '优惠类型',
+    `phone`         varchar(128) COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT '手机号',
+    `create_date`   datetime                                DEFAULT NULL COMMENT '添加日期',
+    `verify_status` int(3) DEFAULT NULL COMMENT '审核状态',
+    `create_time`   datetime                                DEFAULT NULL COMMENT '创建时间',
+    `update_time`   datetime                                DEFAULT NULL COMMENT '修改时间',
+    `del_flag`      tinyint(1) DEFAULT NULL COMMENT '删除标识',
+    PRIMARY KEY (`id`),
+    KEY             `idx_id_card` (`id_card`) USING BTREE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci COMMENT='乘车人表';
+
+CREATE TABLE `t_passenger_10`
+(
+    `id`            bigint(20) unsigned NOT NULL AUTO_INCREMENT COMMENT 'ID',
+    `username`      varchar(256) COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT '用户名',
+    `real_name`     varchar(128) COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT '真实姓名',
+    `id_type`       int(3) DEFAULT NULL COMMENT '证件类型',
+    `id_card`       varchar(256) COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT '证件号码',
+    `discount_type` int(3) DEFAULT NULL COMMENT '优惠类型',
+    `phone`         varchar(128) COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT '手机号',
+    `create_date`   datetime                                DEFAULT NULL COMMENT '添加日期',
+    `verify_status` int(3) DEFAULT NULL COMMENT '审核状态',
+    `create_time`   datetime                                DEFAULT NULL COMMENT '创建时间',
+    `update_time`   datetime                                DEFAULT NULL COMMENT '修改时间',
+    `del_flag`      tinyint(1) DEFAULT NULL COMMENT '删除标识',
+    PRIMARY KEY (`id`),
+    KEY             `idx_id_card` (`id_card`) USING BTREE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci COMMENT='乘车人表';
+
+CREATE TABLE `t_passenger_11`
+(
+    `id`            bigint(20) unsigned NOT NULL AUTO_INCREMENT COMMENT 'ID',
+    `username`      varchar(256) COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT '用户名',
+    `real_name`     varchar(128) COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT '真实姓名',
+    `id_type`       int(3) DEFAULT NULL COMMENT '证件类型',
+    `id_card`       varchar(256) COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT '证件号码',
+    `discount_type` int(3) DEFAULT NULL COMMENT '优惠类型',
+    `phone`         varchar(128) COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT '手机号',
+    `create_date`   datetime                                DEFAULT NULL COMMENT '添加日期',
+    `verify_status` int(3) DEFAULT NULL COMMENT '审核状态',
+    `create_time`   datetime                                DEFAULT NULL COMMENT '创建时间',
+    `update_time`   datetime                                DEFAULT NULL COMMENT '修改时间',
+    `del_flag`      tinyint(1) DEFAULT NULL COMMENT '删除标识',
+    PRIMARY KEY (`id`),
+    KEY             `idx_id_card` (`id_card`) USING BTREE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci COMMENT='乘车人表';
+
+CREATE TABLE `t_passenger_12`
+(
+    `id`            bigint(20) unsigned NOT NULL AUTO_INCREMENT COMMENT 'ID',
+    `username`      varchar(256) COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT '用户名',
+    `real_name`     varchar(128) COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT '真实姓名',
+    `id_type`       int(3) DEFAULT NULL COMMENT '证件类型',
+    `id_card`       varchar(256) COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT '证件号码',
+    `discount_type` int(3) DEFAULT NULL COMMENT '优惠类型',
+    `phone`         varchar(128) COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT '手机号',
+    `create_date`   datetime                                DEFAULT NULL COMMENT '添加日期',
+    `verify_status` int(3) DEFAULT NULL COMMENT '审核状态',
+    `create_time`   datetime                                DEFAULT NULL COMMENT '创建时间',
+    `update_time`   datetime                                DEFAULT NULL COMMENT '修改时间',
+    `del_flag`      tinyint(1) DEFAULT NULL COMMENT '删除标识',
+    PRIMARY KEY (`id`),
+    KEY             `idx_id_card` (`id_card`) USING BTREE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci COMMENT='乘车人表';
+
+CREATE TABLE `t_passenger_13`
+(
+    `id`            bigint(20) unsigned NOT NULL AUTO_INCREMENT COMMENT 'ID',
+    `username`      varchar(256) COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT '用户名',
+    `real_name`     varchar(128) COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT '真实姓名',
+    `id_type`       int(3) DEFAULT NULL COMMENT '证件类型',
+    `id_card`       varchar(256) COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT '证件号码',
+    `discount_type` int(3) DEFAULT NULL COMMENT '优惠类型',
+    `phone`         varchar(128) COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT '手机号',
+    `create_date`   datetime                                DEFAULT NULL COMMENT '添加日期',
+    `verify_status` int(3) DEFAULT NULL COMMENT '审核状态',
+    `create_time`   datetime                                DEFAULT NULL COMMENT '创建时间',
+    `update_time`   datetime                                DEFAULT NULL COMMENT '修改时间',
+    `del_flag`      tinyint(1) DEFAULT NULL COMMENT '删除标识',
+    PRIMARY KEY (`id`),
+    KEY             `idx_id_card` (`id_card`) USING BTREE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci COMMENT='乘车人表';
+
+CREATE TABLE `t_passenger_14`
+(
+    `id`            bigint(20) unsigned NOT NULL AUTO_INCREMENT COMMENT 'ID',
+    `username`      varchar(256) COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT '用户名',
+    `real_name`     varchar(128) COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT '真实姓名',
+    `id_type`       int(3) DEFAULT NULL COMMENT '证件类型',
+    `id_card`       varchar(256) COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT '证件号码',
+    `discount_type` int(3) DEFAULT NULL COMMENT '优惠类型',
+    `phone`         varchar(128) COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT '手机号',
+    `create_date`   datetime                                DEFAULT NULL COMMENT '添加日期',
+    `verify_status` int(3) DEFAULT NULL COMMENT '审核状态',
+    `create_time`   datetime                                DEFAULT NULL COMMENT '创建时间',
+    `update_time`   datetime                                DEFAULT NULL COMMENT '修改时间',
+    `del_flag`      tinyint(1) DEFAULT NULL COMMENT '删除标识',
+    PRIMARY KEY (`id`),
+    KEY             `idx_id_card` (`id_card`) USING BTREE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci COMMENT='乘车人表';
+
+CREATE TABLE `t_passenger_15`
+(
+    `id`            bigint(20) unsigned NOT NULL AUTO_INCREMENT COMMENT 'ID',
+    `username`      varchar(256) COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT '用户名',
+    `real_name`     varchar(128) COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT '真实姓名',
+    `id_type`       int(3) DEFAULT NULL COMMENT '证件类型',
+    `id_card`       varchar(256) COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT '证件号码',
+    `discount_type` int(3) DEFAULT NULL COMMENT '优惠类型',
+    `phone`         varchar(128) COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT '手机号',
+    `create_date`   datetime                                DEFAULT NULL COMMENT '添加日期',
+    `verify_status` int(3) DEFAULT NULL COMMENT '审核状态',
+    `create_time`   datetime                                DEFAULT NULL COMMENT '创建时间',
+    `update_time`   datetime                                DEFAULT NULL COMMENT '修改时间',
+    `del_flag`      tinyint(1) DEFAULT NULL COMMENT '删除标识',
+    PRIMARY KEY (`id`),
+    KEY             `idx_id_card` (`id_card`) USING BTREE
+) ENGINE=InnoDB AUTO_INCREMENT=1683029597561061377 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci COMMENT='乘车人表';
+
+CREATE TABLE `t_passenger_2`
+(
+    `id`            bigint(20) unsigned NOT NULL AUTO_INCREMENT COMMENT 'ID',
+    `username`      varchar(256) COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT '用户名',
+    `real_name`     varchar(128) COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT '真实姓名',
+    `id_type`       int(3) DEFAULT NULL COMMENT '证件类型',
+    `id_card`       varchar(256) COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT '证件号码',
+    `discount_type` int(3) DEFAULT NULL COMMENT '优惠类型',
+    `phone`         varchar(128) COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT '手机号',
+    `create_date`   datetime                                DEFAULT NULL COMMENT '添加日期',
+    `verify_status` int(3) DEFAULT NULL COMMENT '审核状态',
+    `create_time`   datetime                                DEFAULT NULL COMMENT '创建时间',
+    `update_time`   datetime                                DEFAULT NULL COMMENT '修改时间',
+    `del_flag`      tinyint(1) DEFAULT NULL COMMENT '删除标识',
+    PRIMARY KEY (`id`),
+    KEY             `idx_id_card` (`id_card`) USING BTREE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci COMMENT='乘车人表';
+
+CREATE TABLE `t_passenger_3`
+(
+    `id`            bigint(20) unsigned NOT NULL AUTO_INCREMENT COMMENT 'ID',
+    `username`      varchar(256) COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT '用户名',
+    `real_name`     varchar(128) COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT '真实姓名',
+    `id_type`       int(3) DEFAULT NULL COMMENT '证件类型',
+    `id_card`       varchar(256) COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT '证件号码',
+    `discount_type` int(3) DEFAULT NULL COMMENT '优惠类型',
+    `phone`         varchar(128) COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT '手机号',
+    `create_date`   datetime                                DEFAULT NULL COMMENT '添加日期',
+    `verify_status` int(3) DEFAULT NULL COMMENT '审核状态',
+    `create_time`   datetime                                DEFAULT NULL COMMENT '创建时间',
+    `update_time`   datetime                                DEFAULT NULL COMMENT '修改时间',
+    `del_flag`      tinyint(1) DEFAULT NULL COMMENT '删除标识',
+    PRIMARY KEY (`id`),
+    KEY             `idx_id_card` (`id_card`) USING BTREE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci COMMENT='乘车人表';
+
+CREATE TABLE `t_passenger_4`
+(
+    `id`            bigint(20) unsigned NOT NULL AUTO_INCREMENT COMMENT 'ID',
+    `username`      varchar(256) COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT '用户名',
+    `real_name`     varchar(128) COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT '真实姓名',
+    `id_type`       int(3) DEFAULT NULL COMMENT '证件类型',
+    `id_card`       varchar(256) COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT '证件号码',
+    `discount_type` int(3) DEFAULT NULL COMMENT '优惠类型',
+    `phone`         varchar(128) COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT '手机号',
+    `create_date`   datetime                                DEFAULT NULL COMMENT '添加日期',
+    `verify_status` int(3) DEFAULT NULL COMMENT '审核状态',
+    `create_time`   datetime                                DEFAULT NULL COMMENT '创建时间',
+    `update_time`   datetime                                DEFAULT NULL COMMENT '修改时间',
+    `del_flag`      tinyint(1) DEFAULT NULL COMMENT '删除标识',
+    PRIMARY KEY (`id`),
+    KEY             `idx_id_card` (`id_card`) USING BTREE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci COMMENT='乘车人表';
+
+CREATE TABLE `t_passenger_5`
+(
+    `id`            bigint(20) unsigned NOT NULL AUTO_INCREMENT COMMENT 'ID',
+    `username`      varchar(256) COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT '用户名',
+    `real_name`     varchar(128) COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT '真实姓名',
+    `id_type`       int(3) DEFAULT NULL COMMENT '证件类型',
+    `id_card`       varchar(256) COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT '证件号码',
+    `discount_type` int(3) DEFAULT NULL COMMENT '优惠类型',
+    `phone`         varchar(128) COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT '手机号',
+    `create_date`   datetime                                DEFAULT NULL COMMENT '添加日期',
+    `verify_status` int(3) DEFAULT NULL COMMENT '审核状态',
+    `create_time`   datetime                                DEFAULT NULL COMMENT '创建时间',
+    `update_time`   datetime                                DEFAULT NULL COMMENT '修改时间',
+    `del_flag`      tinyint(1) DEFAULT NULL COMMENT '删除标识',
+    PRIMARY KEY (`id`),
+    KEY             `idx_id_card` (`id_card`) USING BTREE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci COMMENT='乘车人表';
+
+CREATE TABLE `t_passenger_6`
+(
+    `id`            bigint(20) unsigned NOT NULL AUTO_INCREMENT COMMENT 'ID',
+    `username`      varchar(256) COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT '用户名',
+    `real_name`     varchar(128) COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT '真实姓名',
+    `id_type`       int(3) DEFAULT NULL COMMENT '证件类型',
+    `id_card`       varchar(256) COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT '证件号码',
+    `discount_type` int(3) DEFAULT NULL COMMENT '优惠类型',
+    `phone`         varchar(128) COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT '手机号',
+    `create_date`   datetime                                DEFAULT NULL COMMENT '添加日期',
+    `verify_status` int(3) DEFAULT NULL COMMENT '审核状态',
+    `create_time`   datetime                                DEFAULT NULL COMMENT '创建时间',
+    `update_time`   datetime                                DEFAULT NULL COMMENT '修改时间',
+    `del_flag`      tinyint(1) DEFAULT NULL COMMENT '删除标识',
+    PRIMARY KEY (`id`),
+    KEY             `idx_id_card` (`id_card`) USING BTREE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci COMMENT='乘车人表';
+
+CREATE TABLE `t_passenger_7`
+(
+    `id`            bigint(20) unsigned NOT NULL AUTO_INCREMENT COMMENT 'ID',
+    `username`      varchar(256) COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT '用户名',
+    `real_name`     varchar(128) COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT '真实姓名',
+    `id_type`       int(3) DEFAULT NULL COMMENT '证件类型',
+    `id_card`       varchar(256) COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT '证件号码',
+    `discount_type` int(3) DEFAULT NULL COMMENT '优惠类型',
+    `phone`         varchar(128) COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT '手机号',
+    `create_date`   datetime                                DEFAULT NULL COMMENT '添加日期',
+    `verify_status` int(3) DEFAULT NULL COMMENT '审核状态',
+    `create_time`   datetime                                DEFAULT NULL COMMENT '创建时间',
+    `update_time`   datetime                                DEFAULT NULL COMMENT '修改时间',
+    `del_flag`      tinyint(1) DEFAULT NULL COMMENT '删除标识',
+    PRIMARY KEY (`id`),
+    KEY             `idx_id_card` (`id_card`) USING BTREE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci COMMENT='乘车人表';
+
+CREATE TABLE `t_passenger_8`
+(
+    `id`            bigint(20) unsigned NOT NULL AUTO_INCREMENT COMMENT 'ID',
+    `username`      varchar(256) COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT '用户名',
+    `real_name`     varchar(128) COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT '真实姓名',
+    `id_type`       int(3) DEFAULT NULL COMMENT '证件类型',
+    `id_card`       varchar(256) COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT '证件号码',
+    `discount_type` int(3) DEFAULT NULL COMMENT '优惠类型',
+    `phone`         varchar(128) COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT '手机号',
+    `create_date`   datetime                                DEFAULT NULL COMMENT '添加日期',
+    `verify_status` int(3) DEFAULT NULL COMMENT '审核状态',
+    `create_time`   datetime                                DEFAULT NULL COMMENT '创建时间',
+    `update_time`   datetime                                DEFAULT NULL COMMENT '修改时间',
+    `del_flag`      tinyint(1) DEFAULT NULL COMMENT '删除标识',
+    PRIMARY KEY (`id`),
+    KEY             `idx_id_card` (`id_card`) USING BTREE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci COMMENT='乘车人表';
+
+CREATE TABLE `t_passenger_9`
+(
+    `id`            bigint(20) unsigned NOT NULL AUTO_INCREMENT COMMENT 'ID',
+    `username`      varchar(256) COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT '用户名',
+    `real_name`     varchar(128) COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT '真实姓名',
+    `id_type`       int(3) DEFAULT NULL COMMENT '证件类型',
+    `id_card`       varchar(256) COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT '证件号码',
+    `discount_type` int(3) DEFAULT NULL COMMENT '优惠类型',
+    `phone`         varchar(128) COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT '手机号',
+    `create_date`   datetime                                DEFAULT NULL COMMENT '添加日期',
+    `verify_status` int(3) DEFAULT NULL COMMENT '审核状态',
+    `create_time`   datetime                                DEFAULT NULL COMMENT '创建时间',
+    `update_time`   datetime                                DEFAULT NULL COMMENT '修改时间',
+    `del_flag`      tinyint(1) DEFAULT NULL COMMENT '删除标识',
+    PRIMARY KEY (`id`),
+    KEY             `idx_id_card` (`id_card`) USING BTREE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci COMMENT='乘车人表';

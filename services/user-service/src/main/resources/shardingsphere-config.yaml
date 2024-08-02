@@ -27,6 +27,12 @@ rules:
           standard:
             shardingColumn: phone
             shardingAlgorithmName: t_user_phone_table_mod
+      t_passenger:
+        actualDataNodes: ds_0.t_passenger_${0..15}
+        tableStrategy:
+          standard:
+            shardingColumn: username
+            shardingAlgorithmName: passenger_table_hash_mod
     shardingAlgorithms:
       user_hash_mod:
         type: HASH_MOD
@@ -37,6 +43,10 @@ rules:
         props:
           sharding-count: 16
       t_user_phone_table_mod:
+        type: HASH_MOD
+        props:
+          sharding-count: 16
+      passenger_table_hash_mod:
         type: HASH_MOD
         props:
           sharding-count: 16
@@ -55,6 +65,14 @@ rules:
             encryptorName: common_encryptor
           address:
             cipherColumn: address
+            encryptorName: common_encryptor
+      t_passenger:
+        columns:
+          id_card:
+            cipherColumn: id_card
+            encryptorName: common_encryptor
+          phone:
+            cipherColumn: phone
             encryptorName: common_encryptor
     encryptors:
       common_encryptor:
