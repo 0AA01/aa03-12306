@@ -809,3 +809,14 @@ CREATE TABLE `t_user_phone_9`
     PRIMARY KEY (`id`),
     UNIQUE KEY `idx_phone` (`phone`,`deletion_time`) USING BTREE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci COMMENT='用户号码表';
+
+CREATE TABLE `t_user_reuse`
+(
+    `id`          bigint(20) NOT NULL AUTO_INCREMENT COMMENT 'ID',
+    `username`    varchar(256) COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT '用户名',
+    `create_time` datetime                                DEFAULT NULL COMMENT '创建时间',
+    `update_time` datetime                                DEFAULT NULL COMMENT '修改时间',
+    `del_flag`    tinyint(1) DEFAULT NULL COMMENT '删除标识',
+    PRIMARY KEY (`id`),
+    KEY           `idx_username` (`username`) USING BTREE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci COMMENT='用户名复用表';
