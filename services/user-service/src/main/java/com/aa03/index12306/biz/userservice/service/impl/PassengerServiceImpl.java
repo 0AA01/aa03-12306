@@ -1,12 +1,16 @@
 package com.aa03.index12306.biz.userservice.service.impl;
 
+import cn.hutool.core.collection.CollUtil;
 import cn.hutool.core.util.IdcardUtil;
 import cn.hutool.core.util.PhoneUtil;
+import cn.hutool.core.util.StrUtil;
 import com.aa03.index12306.biz.userservice.common.enums.VerifyStatusEnum;
 import com.aa03.index12306.biz.userservice.dao.entity.PassengerDO;
 import com.aa03.index12306.biz.userservice.dao.mapper.PassengerMapper;
 import com.aa03.index12306.biz.userservice.dto.res.PassengerRemoveReqDTO;
 import com.aa03.index12306.biz.userservice.dto.res.PassengerReqDTO;
+import com.aa03.index12306.biz.userservice.dto.resp.PassengerActualRespDTO;
+import com.aa03.index12306.biz.userservice.dto.resp.PassengerRespDTO;
 import com.aa03.index12306.biz.userservice.service.PassengerService;
 import com.aa03.index12306.framework.starter.cache.DistributedCache;
 import com.aa03.index12306.framework.starter.common.toolkit.BeanUtil;
@@ -23,7 +27,11 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
 import java.util.Date;
+import java.util.List;
 import java.util.Objects;
+import java.util.Optional;
+import java.util.concurrent.TimeUnit;
+import java.util.stream.Collectors;
 
 import static com.aa03.index12306.biz.userservice.common.constant.RedisKeyConstant.USER_PASSENGER_LIST;
 
@@ -112,6 +120,42 @@ public class PassengerServiceImpl implements PassengerService {
             throw ex;
         }
         delUserPassengerCache(username);
+    }
+
+    @Override
+    public List<PassengerRespDTO> listPassengerQueryByUsername(String username) {
+        String actualUserPassengerListStr = getActualUserPassengerListStr(username);
+        return Optional.ofNullable(actualUserPassengerListStr)
+                .map(each -> JSON.parseArray(each, PassengerDO.class))
+                .map(each -> BeanUtil.convert(each, PassengerRespDTO.class))
+                .orElse(null);
+    }
+
+    @Override
+    public List<PassengerActualRespDTO> listPassengerQueryByIds(String username, List<Long> ids) {
+        String actualUserPassengerListStr = getActualUserPassengerListStr(username);
+        if (StrUtil.isEmpty(actualUserPassengerListStr)) {
+            return null;
+        }
+        return JSON.parseArray(actualUserPassengerListStr, PassengerDO.class)
+                .stream().filter(passengerDO -> ids.contains(passengerDO.getId()))
+                .map(each -> BeanUtil.convert(each, PassengerActualRespDTO.class))
+                .collect(Collectors.toList());
+    }
+
+    private String getActualUserPassengerListStr(String username) {
+        return distributedCache.safeGet(
+                USER_PASSENGER_LIST + username,
+                String.class,
+                () -> {
+                    LambdaQueryWrapper<PassengerDO> queryWrapper = Wrappers.lambdaQuery(PassengerDO.class)
+                            .eq(PassengerDO::getUsername, username);
+                    List<PassengerDO> passengerDOList = passengerMapper.selectList(queryWrapper);
+                    return CollUtil.isNotEmpty(passengerDOList) ? JSON.toJSONString(passengerDOList) : null;
+                },
+                1,
+                TimeUnit.DAYS
+        );
     }
 
     private PassengerDO selectPassenger(String username, String passengerId) {
