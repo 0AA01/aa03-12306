@@ -13,6 +13,8 @@ import com.aa03.index12306.framework.starter.convention.exception.ClientExceptio
 import com.aa03.index12306.framework.starter.convention.exception.ServiceException;
 import com.aa03.index12306.frameworks.starter.user.core.UserContext;
 import com.alibaba.fastjson2.JSON;
+import com.baomidou.mybatisplus.core.conditions.update.LambdaUpdateWrapper;
+import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import com.baomidou.mybatisplus.extension.toolkit.SqlHelper;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -51,6 +53,31 @@ public class PassengerServiceImpl implements PassengerService {
                 log.error("{}，请求参数：{}", ex.getMessage(), JSON.toJSONString(requestParam));
             } else {
                 log.error("[{}] 新增乘车人失败，请求参数：{}", username, JSON.toJSONString(requestParam), ex);
+            }
+            throw ex;
+        }
+        delUserPassengerCache(username);
+    }
+
+    @Override
+    public void updatePassenger(PassengerReqDTO requestParam) {
+        verifyPassenger(requestParam);
+        String username = UserContext.getUsername();
+        try {
+            PassengerDO passengerDO = BeanUtil.convert(requestParam, PassengerDO.class);
+            passengerDO.setUsername(username);
+            LambdaUpdateWrapper<PassengerDO> updateWrapper = Wrappers.lambdaUpdate(PassengerDO.class)
+                    .eq(PassengerDO::getUsername, username)
+                    .eq(PassengerDO::getId, requestParam.getId());
+            int updated = passengerMapper.update(passengerDO, updateWrapper);
+            if (!SqlHelper.retBool(updated)) {
+                throw new ServiceException(String.format("[%s] 修改乘车人失败", username));
+            }
+        } catch (Exception ex) {
+            if (ex instanceof ServiceException) {
+                log.error("{}，请求参数：{}", ex.getMessage(), JSON.toJSONString(requestParam));
+            } else {
+                log.error("[{}] 修改乘车人失败，请求参数：{}", username, JSON.toJSONString(requestParam), ex);
             }
             throw ex;
         }
