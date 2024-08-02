@@ -381,3 +381,431 @@ CREATE TABLE `t_user_9`
     PRIMARY KEY (`id`),
     UNIQUE KEY `idx_username` (`username`,`deletion_time`) USING BTREE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci COMMENT='用户表';
+
+CREATE TABLE `t_user_deletion`
+(
+    `id`          bigint(20) NOT NULL AUTO_INCREMENT COMMENT 'ID',
+    `id_type`     int(3) DEFAULT NULL COMMENT '证件类型',
+    `id_card`     varchar(256) COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT '证件号',
+    `create_time` datetime                                DEFAULT NULL COMMENT '创建时间',
+    `update_time` datetime                                DEFAULT NULL COMMENT '修改时间',
+    `del_flag`    tinyint(1) DEFAULT NULL COMMENT '删除标识',
+    PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci COMMENT='用户注销表';
+
+
+CREATE TABLE `t_user_mail_0`
+(
+    `id`            bigint(20) NOT NULL AUTO_INCREMENT COMMENT 'ID',
+    `username`      varchar(256) COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT '用户名',
+    `mail`          varchar(256) COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT '邮箱',
+    `deletion_time` bigint(20) DEFAULT '0' COMMENT '注销时间戳',
+    `create_time`   datetime                                DEFAULT NULL COMMENT '创建时间',
+    `update_time`   datetime                                DEFAULT NULL COMMENT '修改时间',
+    `del_flag`      tinyint(1) DEFAULT NULL COMMENT '删除标识',
+    PRIMARY KEY (`id`),
+    UNIQUE KEY `idx_mail` (`mail`,`deletion_time`) USING BTREE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci COMMENT='用户邮箱表';
+
+CREATE TABLE `t_user_mail_1`
+(
+    `id`            bigint(20) NOT NULL AUTO_INCREMENT COMMENT 'ID',
+    `username`      varchar(256) COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT '用户名',
+    `mail`          varchar(256) COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT '邮箱',
+    `deletion_time` bigint(20) DEFAULT '0' COMMENT '注销时间戳',
+    `create_time`   datetime                                DEFAULT NULL COMMENT '创建时间',
+    `update_time`   datetime                                DEFAULT NULL COMMENT '修改时间',
+    `del_flag`      tinyint(1) DEFAULT NULL COMMENT '删除标识',
+    PRIMARY KEY (`id`),
+    UNIQUE KEY `idx_mail` (`mail`,`deletion_time`) USING BTREE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci COMMENT='用户邮箱表';
+
+CREATE TABLE `t_user_mail_10`
+(
+    `id`            bigint(20) NOT NULL AUTO_INCREMENT COMMENT 'ID',
+    `username`      varchar(256) COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT '用户名',
+    `mail`          varchar(256) COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT '邮箱',
+    `deletion_time` bigint(20) DEFAULT '0' COMMENT '注销时间戳',
+    `create_time`   datetime                                DEFAULT NULL COMMENT '创建时间',
+    `update_time`   datetime                                DEFAULT NULL COMMENT '修改时间',
+    `del_flag`      tinyint(1) DEFAULT NULL COMMENT '删除标识',
+    PRIMARY KEY (`id`),
+    UNIQUE KEY `idx_mail` (`mail`,`deletion_time`) USING BTREE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci COMMENT='用户邮箱表';
+
+CREATE TABLE `t_user_mail_11`
+(
+    `id`            bigint(20) NOT NULL AUTO_INCREMENT COMMENT 'ID',
+    `username`      varchar(256) COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT '用户名',
+    `mail`          varchar(256) COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT '邮箱',
+    `deletion_time` bigint(20) DEFAULT '0' COMMENT '注销时间戳',
+    `create_time`   datetime                                DEFAULT NULL COMMENT '创建时间',
+    `update_time`   datetime                                DEFAULT NULL COMMENT '修改时间',
+    `del_flag`      tinyint(1) DEFAULT NULL COMMENT '删除标识',
+    PRIMARY KEY (`id`),
+    UNIQUE KEY `idx_mail` (`mail`,`deletion_time`) USING BTREE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci COMMENT='用户邮箱表';
+
+CREATE TABLE `t_user_mail_12`
+(
+    `id`            bigint(20) NOT NULL AUTO_INCREMENT COMMENT 'ID',
+    `username`      varchar(256) COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT '用户名',
+    `mail`          varchar(256) COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT '邮箱',
+    `deletion_time` bigint(20) DEFAULT '0' COMMENT '注销时间戳',
+    `create_time`   datetime                                DEFAULT NULL COMMENT '创建时间',
+    `update_time`   datetime                                DEFAULT NULL COMMENT '修改时间',
+    `del_flag`      tinyint(1) DEFAULT NULL COMMENT '删除标识',
+    PRIMARY KEY (`id`),
+    UNIQUE KEY `idx_mail` (`mail`,`deletion_time`) USING BTREE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci COMMENT='用户邮箱表';
+
+CREATE TABLE `t_user_mail_13`
+(
+    `id`            bigint(20) NOT NULL AUTO_INCREMENT COMMENT 'ID',
+    `username`      varchar(256) COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT '用户名',
+    `mail`          varchar(256) COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT '邮箱',
+    `deletion_time` bigint(20) DEFAULT '0' COMMENT '注销时间戳',
+    `create_time`   datetime                                DEFAULT NULL COMMENT '创建时间',
+    `update_time`   datetime                                DEFAULT NULL COMMENT '修改时间',
+    `del_flag`      tinyint(1) DEFAULT NULL COMMENT '删除标识',
+    PRIMARY KEY (`id`),
+    UNIQUE KEY `idx_mail` (`mail`,`deletion_time`) USING BTREE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci COMMENT='用户邮箱表';
+
+CREATE TABLE `t_user_mail_14`
+(
+    `id`            bigint(20) NOT NULL AUTO_INCREMENT COMMENT 'ID',
+    `username`      varchar(256) COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT '用户名',
+    `mail`          varchar(256) COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT '邮箱',
+    `deletion_time` bigint(20) DEFAULT '0' COMMENT '注销时间戳',
+    `create_time`   datetime                                DEFAULT NULL COMMENT '创建时间',
+    `update_time`   datetime                                DEFAULT NULL COMMENT '修改时间',
+    `del_flag`      tinyint(1) DEFAULT NULL COMMENT '删除标识',
+    PRIMARY KEY (`id`),
+    UNIQUE KEY `idx_mail` (`mail`,`deletion_time`) USING BTREE
+) ENGINE=InnoDB AUTO_INCREMENT=1683025552452648961 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci COMMENT='用户邮箱表';
+
+CREATE TABLE `t_user_mail_15`
+(
+    `id`            bigint(20) NOT NULL AUTO_INCREMENT COMMENT 'ID',
+    `username`      varchar(256) COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT '用户名',
+    `mail`          varchar(256) COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT '邮箱',
+    `deletion_time` bigint(20) DEFAULT '0' COMMENT '注销时间戳',
+    `create_time`   datetime                                DEFAULT NULL COMMENT '创建时间',
+    `update_time`   datetime                                DEFAULT NULL COMMENT '修改时间',
+    `del_flag`      tinyint(1) DEFAULT NULL COMMENT '删除标识',
+    PRIMARY KEY (`id`),
+    UNIQUE KEY `idx_mail` (`mail`,`deletion_time`) USING BTREE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci COMMENT='用户邮箱表';
+
+CREATE TABLE `t_user_mail_2`
+(
+    `id`            bigint(20) NOT NULL AUTO_INCREMENT COMMENT 'ID',
+    `username`      varchar(256) COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT '用户名',
+    `mail`          varchar(256) COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT '邮箱',
+    `deletion_time` bigint(20) DEFAULT '0' COMMENT '注销时间戳',
+    `create_time`   datetime                                DEFAULT NULL COMMENT '创建时间',
+    `update_time`   datetime                                DEFAULT NULL COMMENT '修改时间',
+    `del_flag`      tinyint(1) DEFAULT NULL COMMENT '删除标识',
+    PRIMARY KEY (`id`),
+    UNIQUE KEY `idx_mail` (`mail`,`deletion_time`) USING BTREE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci COMMENT='用户邮箱表';
+
+CREATE TABLE `t_user_mail_3`
+(
+    `id`            bigint(20) NOT NULL AUTO_INCREMENT COMMENT 'ID',
+    `username`      varchar(256) COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT '用户名',
+    `mail`          varchar(256) COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT '邮箱',
+    `deletion_time` bigint(20) DEFAULT '0' COMMENT '注销时间戳',
+    `create_time`   datetime                                DEFAULT NULL COMMENT '创建时间',
+    `update_time`   datetime                                DEFAULT NULL COMMENT '修改时间',
+    `del_flag`      tinyint(1) DEFAULT NULL COMMENT '删除标识',
+    PRIMARY KEY (`id`),
+    UNIQUE KEY `idx_mail` (`mail`,`deletion_time`) USING BTREE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci COMMENT='用户邮箱表';
+
+CREATE TABLE `t_user_mail_4`
+(
+    `id`            bigint(20) NOT NULL AUTO_INCREMENT COMMENT 'ID',
+    `username`      varchar(256) COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT '用户名',
+    `mail`          varchar(256) COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT '邮箱',
+    `deletion_time` bigint(20) DEFAULT '0' COMMENT '注销时间戳',
+    `create_time`   datetime                                DEFAULT NULL COMMENT '创建时间',
+    `update_time`   datetime                                DEFAULT NULL COMMENT '修改时间',
+    `del_flag`      tinyint(1) DEFAULT NULL COMMENT '删除标识',
+    PRIMARY KEY (`id`),
+    UNIQUE KEY `idx_mail` (`mail`,`deletion_time`) USING BTREE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci COMMENT='用户邮箱表';
+
+CREATE TABLE `t_user_mail_5`
+(
+    `id`            bigint(20) NOT NULL AUTO_INCREMENT COMMENT 'ID',
+    `username`      varchar(256) COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT '用户名',
+    `mail`          varchar(256) COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT '邮箱',
+    `deletion_time` bigint(20) DEFAULT '0' COMMENT '注销时间戳',
+    `create_time`   datetime                                DEFAULT NULL COMMENT '创建时间',
+    `update_time`   datetime                                DEFAULT NULL COMMENT '修改时间',
+    `del_flag`      tinyint(1) DEFAULT NULL COMMENT '删除标识',
+    PRIMARY KEY (`id`),
+    UNIQUE KEY `idx_mail` (`mail`,`deletion_time`) USING BTREE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci COMMENT='用户邮箱表';
+
+CREATE TABLE `t_user_mail_6`
+(
+    `id`            bigint(20) NOT NULL AUTO_INCREMENT COMMENT 'ID',
+    `username`      varchar(256) COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT '用户名',
+    `mail`          varchar(256) COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT '邮箱',
+    `deletion_time` bigint(20) DEFAULT '0' COMMENT '注销时间戳',
+    `create_time`   datetime                                DEFAULT NULL COMMENT '创建时间',
+    `update_time`   datetime                                DEFAULT NULL COMMENT '修改时间',
+    `del_flag`      tinyint(1) DEFAULT NULL COMMENT '删除标识',
+    PRIMARY KEY (`id`),
+    UNIQUE KEY `idx_mail` (`mail`,`deletion_time`) USING BTREE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci COMMENT='用户邮箱表';
+
+CREATE TABLE `t_user_mail_7`
+(
+    `id`            bigint(20) NOT NULL AUTO_INCREMENT COMMENT 'ID',
+    `username`      varchar(256) COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT '用户名',
+    `mail`          varchar(256) COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT '邮箱',
+    `deletion_time` bigint(20) DEFAULT '0' COMMENT '注销时间戳',
+    `create_time`   datetime                                DEFAULT NULL COMMENT '创建时间',
+    `update_time`   datetime                                DEFAULT NULL COMMENT '修改时间',
+    `del_flag`      tinyint(1) DEFAULT NULL COMMENT '删除标识',
+    PRIMARY KEY (`id`),
+    UNIQUE KEY `idx_mail` (`mail`,`deletion_time`) USING BTREE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci COMMENT='用户邮箱表';
+
+CREATE TABLE `t_user_mail_8`
+(
+    `id`            bigint(20) NOT NULL AUTO_INCREMENT COMMENT 'ID',
+    `username`      varchar(256) COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT '用户名',
+    `mail`          varchar(256) COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT '邮箱',
+    `deletion_time` bigint(20) DEFAULT '0' COMMENT '注销时间戳',
+    `create_time`   datetime                                DEFAULT NULL COMMENT '创建时间',
+    `update_time`   datetime                                DEFAULT NULL COMMENT '修改时间',
+    `del_flag`      tinyint(1) DEFAULT NULL COMMENT '删除标识',
+    PRIMARY KEY (`id`),
+    UNIQUE KEY `idx_mail` (`mail`,`deletion_time`) USING BTREE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci COMMENT='用户邮箱表';
+
+CREATE TABLE `t_user_mail_9`
+(
+    `id`            bigint(20) NOT NULL AUTO_INCREMENT COMMENT 'ID',
+    `username`      varchar(256) COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT '用户名',
+    `mail`          varchar(256) COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT '邮箱',
+    `deletion_time` bigint(20) DEFAULT '0' COMMENT '注销时间戳',
+    `create_time`   datetime                                DEFAULT NULL COMMENT '创建时间',
+    `update_time`   datetime                                DEFAULT NULL COMMENT '修改时间',
+    `del_flag`      tinyint(1) DEFAULT NULL COMMENT '删除标识',
+    PRIMARY KEY (`id`),
+    UNIQUE KEY `idx_mail` (`mail`,`deletion_time`) USING BTREE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci COMMENT='用户邮箱表';
+
+CREATE TABLE `t_user_phone_0`
+(
+    `id`            bigint(20) NOT NULL AUTO_INCREMENT COMMENT 'ID',
+    `username`      varchar(256) COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT '用户名',
+    `phone`         varchar(128) COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT '手机号',
+    `deletion_time` bigint(20) DEFAULT '0' COMMENT '注销时间戳',
+    `create_time`   datetime                                DEFAULT NULL COMMENT '创建时间',
+    `update_time`   datetime                                DEFAULT NULL COMMENT '修改时间',
+    `del_flag`      tinyint(1) DEFAULT NULL COMMENT '删除标识',
+    PRIMARY KEY (`id`),
+    UNIQUE KEY `idx_phone` (`phone`,`deletion_time`) USING BTREE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci COMMENT='用户号码表';
+
+CREATE TABLE `t_user_phone_1`
+(
+    `id`            bigint(20) NOT NULL AUTO_INCREMENT COMMENT 'ID',
+    `username`      varchar(256) COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT '用户名',
+    `phone`         varchar(128) COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT '手机号',
+    `deletion_time` bigint(20) DEFAULT '0' COMMENT '注销时间戳',
+    `create_time`   datetime                                DEFAULT NULL COMMENT '创建时间',
+    `update_time`   datetime                                DEFAULT NULL COMMENT '修改时间',
+    `del_flag`      tinyint(1) DEFAULT NULL COMMENT '删除标识',
+    PRIMARY KEY (`id`),
+    UNIQUE KEY `idx_phone` (`phone`,`deletion_time`) USING BTREE
+) ENGINE=InnoDB AUTO_INCREMENT=1683025552431677441 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci COMMENT='用户号码表';
+
+CREATE TABLE `t_user_phone_10`
+(
+    `id`            bigint(20) NOT NULL AUTO_INCREMENT COMMENT 'ID',
+    `username`      varchar(256) COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT '用户名',
+    `phone`         varchar(128) COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT '手机号',
+    `deletion_time` bigint(20) DEFAULT '0' COMMENT '注销时间戳',
+    `create_time`   datetime                                DEFAULT NULL COMMENT '创建时间',
+    `update_time`   datetime                                DEFAULT NULL COMMENT '修改时间',
+    `del_flag`      tinyint(1) DEFAULT NULL COMMENT '删除标识',
+    PRIMARY KEY (`id`),
+    UNIQUE KEY `idx_phone` (`phone`,`deletion_time`) USING BTREE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci COMMENT='用户号码表';
+
+CREATE TABLE `t_user_phone_11`
+(
+    `id`            bigint(20) NOT NULL AUTO_INCREMENT COMMENT 'ID',
+    `username`      varchar(256) COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT '用户名',
+    `phone`         varchar(128) COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT '手机号',
+    `deletion_time` bigint(20) DEFAULT '0' COMMENT '注销时间戳',
+    `create_time`   datetime                                DEFAULT NULL COMMENT '创建时间',
+    `update_time`   datetime                                DEFAULT NULL COMMENT '修改时间',
+    `del_flag`      tinyint(1) DEFAULT NULL COMMENT '删除标识',
+    PRIMARY KEY (`id`),
+    UNIQUE KEY `idx_phone` (`phone`,`deletion_time`) USING BTREE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci COMMENT='用户号码表';
+
+CREATE TABLE `t_user_phone_12`
+(
+    `id`            bigint(20) NOT NULL AUTO_INCREMENT COMMENT 'ID',
+    `username`      varchar(256) COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT '用户名',
+    `phone`         varchar(128) COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT '手机号',
+    `deletion_time` bigint(20) DEFAULT '0' COMMENT '注销时间戳',
+    `create_time`   datetime                                DEFAULT NULL COMMENT '创建时间',
+    `update_time`   datetime                                DEFAULT NULL COMMENT '修改时间',
+    `del_flag`      tinyint(1) DEFAULT NULL COMMENT '删除标识',
+    PRIMARY KEY (`id`),
+    UNIQUE KEY `idx_phone` (`phone`,`deletion_time`) USING BTREE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci COMMENT='用户号码表';
+
+CREATE TABLE `t_user_phone_13`
+(
+    `id`            bigint(20) NOT NULL AUTO_INCREMENT COMMENT 'ID',
+    `username`      varchar(256) COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT '用户名',
+    `phone`         varchar(128) COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT '手机号',
+    `deletion_time` bigint(20) DEFAULT '0' COMMENT '注销时间戳',
+    `create_time`   datetime                                DEFAULT NULL COMMENT '创建时间',
+    `update_time`   datetime                                DEFAULT NULL COMMENT '修改时间',
+    `del_flag`      tinyint(1) DEFAULT NULL COMMENT '删除标识',
+    PRIMARY KEY (`id`),
+    UNIQUE KEY `idx_phone` (`phone`,`deletion_time`) USING BTREE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci COMMENT='用户号码表';
+
+CREATE TABLE `t_user_phone_14`
+(
+    `id`            bigint(20) NOT NULL AUTO_INCREMENT COMMENT 'ID',
+    `username`      varchar(256) COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT '用户名',
+    `phone`         varchar(128) COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT '手机号',
+    `deletion_time` bigint(20) DEFAULT '0' COMMENT '注销时间戳',
+    `create_time`   datetime                                DEFAULT NULL COMMENT '创建时间',
+    `update_time`   datetime                                DEFAULT NULL COMMENT '修改时间',
+    `del_flag`      tinyint(1) DEFAULT NULL COMMENT '删除标识',
+    PRIMARY KEY (`id`),
+    UNIQUE KEY `idx_phone` (`phone`,`deletion_time`) USING BTREE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci COMMENT='用户号码表';
+
+CREATE TABLE `t_user_phone_15`
+(
+    `id`            bigint(20) NOT NULL AUTO_INCREMENT COMMENT 'ID',
+    `username`      varchar(256) COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT '用户名',
+    `phone`         varchar(128) COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT '手机号',
+    `deletion_time` bigint(20) DEFAULT '0' COMMENT '注销时间戳',
+    `create_time`   datetime                                DEFAULT NULL COMMENT '创建时间',
+    `update_time`   datetime                                DEFAULT NULL COMMENT '修改时间',
+    `del_flag`      tinyint(1) DEFAULT NULL COMMENT '删除标识',
+    PRIMARY KEY (`id`),
+    UNIQUE KEY `idx_phone` (`phone`,`deletion_time`) USING BTREE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci COMMENT='用户号码表';
+
+CREATE TABLE `t_user_phone_2`
+(
+    `id`            bigint(20) NOT NULL AUTO_INCREMENT COMMENT 'ID',
+    `username`      varchar(256) COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT '用户名',
+    `phone`         varchar(128) COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT '手机号',
+    `deletion_time` bigint(20) DEFAULT '0' COMMENT '注销时间戳',
+    `create_time`   datetime                                DEFAULT NULL COMMENT '创建时间',
+    `update_time`   datetime                                DEFAULT NULL COMMENT '修改时间',
+    `del_flag`      tinyint(1) DEFAULT NULL COMMENT '删除标识',
+    PRIMARY KEY (`id`),
+    UNIQUE KEY `idx_phone` (`phone`,`deletion_time`) USING BTREE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci COMMENT='用户号码表';
+
+CREATE TABLE `t_user_phone_3`
+(
+    `id`            bigint(20) NOT NULL AUTO_INCREMENT COMMENT 'ID',
+    `username`      varchar(256) COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT '用户名',
+    `phone`         varchar(128) COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT '手机号',
+    `deletion_time` bigint(20) DEFAULT '0' COMMENT '注销时间戳',
+    `create_time`   datetime                                DEFAULT NULL COMMENT '创建时间',
+    `update_time`   datetime                                DEFAULT NULL COMMENT '修改时间',
+    `del_flag`      tinyint(1) DEFAULT NULL COMMENT '删除标识',
+    PRIMARY KEY (`id`),
+    UNIQUE KEY `idx_phone` (`phone`,`deletion_time`) USING BTREE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci COMMENT='用户号码表';
+
+CREATE TABLE `t_user_phone_4`
+(
+    `id`            bigint(20) NOT NULL AUTO_INCREMENT COMMENT 'ID',
+    `username`      varchar(256) COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT '用户名',
+    `phone`         varchar(128) COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT '手机号',
+    `deletion_time` bigint(20) DEFAULT '0' COMMENT '注销时间戳',
+    `create_time`   datetime                                DEFAULT NULL COMMENT '创建时间',
+    `update_time`   datetime                                DEFAULT NULL COMMENT '修改时间',
+    `del_flag`      tinyint(1) DEFAULT NULL COMMENT '删除标识',
+    PRIMARY KEY (`id`),
+    UNIQUE KEY `idx_phone` (`phone`,`deletion_time`) USING BTREE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci COMMENT='用户号码表';
+
+CREATE TABLE `t_user_phone_5`
+(
+    `id`            bigint(20) NOT NULL AUTO_INCREMENT COMMENT 'ID',
+    `username`      varchar(256) COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT '用户名',
+    `phone`         varchar(128) COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT '手机号',
+    `deletion_time` bigint(20) DEFAULT '0' COMMENT '注销时间戳',
+    `create_time`   datetime                                DEFAULT NULL COMMENT '创建时间',
+    `update_time`   datetime                                DEFAULT NULL COMMENT '修改时间',
+    `del_flag`      tinyint(1) DEFAULT NULL COMMENT '删除标识',
+    PRIMARY KEY (`id`),
+    UNIQUE KEY `idx_phone` (`phone`,`deletion_time`) USING BTREE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci COMMENT='用户号码表';
+
+CREATE TABLE `t_user_phone_6`
+(
+    `id`            bigint(20) NOT NULL AUTO_INCREMENT COMMENT 'ID',
+    `username`      varchar(256) COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT '用户名',
+    `phone`         varchar(128) COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT '手机号',
+    `deletion_time` bigint(20) DEFAULT '0' COMMENT '注销时间戳',
+    `create_time`   datetime                                DEFAULT NULL COMMENT '创建时间',
+    `update_time`   datetime                                DEFAULT NULL COMMENT '修改时间',
+    `del_flag`      tinyint(1) DEFAULT NULL COMMENT '删除标识',
+    PRIMARY KEY (`id`),
+    UNIQUE KEY `idx_phone` (`phone`,`deletion_time`) USING BTREE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci COMMENT='用户号码表';
+
+CREATE TABLE `t_user_phone_7`
+(
+    `id`            bigint(20) NOT NULL AUTO_INCREMENT COMMENT 'ID',
+    `username`      varchar(256) COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT '用户名',
+    `phone`         varchar(128) COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT '手机号',
+    `deletion_time` bigint(20) DEFAULT '0' COMMENT '注销时间戳',
+    `create_time`   datetime                                DEFAULT NULL COMMENT '创建时间',
+    `update_time`   datetime                                DEFAULT NULL COMMENT '修改时间',
+    `del_flag`      tinyint(1) DEFAULT NULL COMMENT '删除标识',
+    PRIMARY KEY (`id`),
+    UNIQUE KEY `idx_phone` (`phone`,`deletion_time`) USING BTREE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci COMMENT='用户号码表';
+
+CREATE TABLE `t_user_phone_8`
+(
+    `id`            bigint(20) NOT NULL AUTO_INCREMENT COMMENT 'ID',
+    `username`      varchar(256) COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT '用户名',
+    `phone`         varchar(128) COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT '手机号',
+    `deletion_time` bigint(20) DEFAULT '0' COMMENT '注销时间戳',
+    `create_time`   datetime                                DEFAULT NULL COMMENT '创建时间',
+    `update_time`   datetime                                DEFAULT NULL COMMENT '修改时间',
+    `del_flag`      tinyint(1) DEFAULT NULL COMMENT '删除标识',
+    PRIMARY KEY (`id`),
+    UNIQUE KEY `idx_phone` (`phone`,`deletion_time`) USING BTREE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci COMMENT='用户号码表';
+
+CREATE TABLE `t_user_phone_9`
+(
+    `id`            bigint(20) NOT NULL AUTO_INCREMENT COMMENT 'ID',
+    `username`      varchar(256) COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT '用户名',
+    `phone`         varchar(128) COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT '手机号',
+    `deletion_time` bigint(20) DEFAULT '0' COMMENT '注销时间戳',
+    `create_time`   datetime                                DEFAULT NULL COMMENT '创建时间',
+    `update_time`   datetime                                DEFAULT NULL COMMENT '修改时间',
+    `del_flag`      tinyint(1) DEFAULT NULL COMMENT '删除标识',
+    PRIMARY KEY (`id`),
+    UNIQUE KEY `idx_phone` (`phone`,`deletion_time`) USING BTREE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci COMMENT='用户号码表';
