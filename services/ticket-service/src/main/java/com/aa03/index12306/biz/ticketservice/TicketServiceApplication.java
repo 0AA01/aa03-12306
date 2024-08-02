@@ -1,16 +1,17 @@
-package com.aa03.index12306.biz.userservice;
+package com.aa03.index12306.biz.ticketservice;
+
 
 import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 /**
- * 用户服务启动器
+ * 购票服务应用启动器
  */
 @SpringBootApplication
-@MapperScan("com.aa03.index12306.biz.userservice.dao.mapper")
-public class UserServiceApplication {
+@MapperScan("com.aa03.index12306.biz.ticketservice.dao.mapper")
+public class TicketServiceApplication {
     public static void main(String[] args) {
-        SpringApplication.run(UserServiceApplication.class, args);
+        SpringApplication.run(TicketServiceApplication.class, args);
     }
 }
