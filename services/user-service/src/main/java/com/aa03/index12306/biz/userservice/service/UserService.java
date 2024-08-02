@@ -25,4 +25,13 @@ public interface UserService extends IService<UserDO> {
      * @return 用户无脱敏详细信息
      */
     UserQueryActualRespDTO queryActualUserByUsername(String username);
+
+    /**
+     * 根据证件类型和证件号查询注销次数
+     *
+     * @param idType 证件类型
+     * @param idCard 证件号
+     * @return 注销次数
+     */
+    Integer queryUserDeletionNum(Integer idType, String idCard);
 }
