@@ -1,5 +1,6 @@
 package com.aa03.index12306.biz.userservice.controller;
 
+import com.aa03.index12306.biz.userservice.dto.res.UserDeletionReqDTO;
 import com.aa03.index12306.biz.userservice.dto.res.UserRegisterReqDTO;
 import com.aa03.index12306.biz.userservice.dto.res.UserUpdateReqDTO;
 import com.aa03.index12306.biz.userservice.dto.resp.UserQueryActualRespDTO;
@@ -62,6 +63,15 @@ public class UserInfoController {
     @PostMapping("/api/user-service/update")
     public Result<Void> update(@RequestBody @Valid UserUpdateReqDTO requestParam) {
         userService.update(requestParam);
+        return Results.success();
+    }
+
+    /**
+     * 注销用户
+     */
+    @PostMapping("/api/user-service/deletion")
+    public Result<Void> deletion(@RequestBody @Valid UserDeletionReqDTO requestParam) {
+        userLoginService.deletion(requestParam);
         return Results.success();
     }
 }

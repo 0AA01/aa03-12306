@@ -86,6 +86,12 @@
             <artifactId>index12306-web-spring-boot-starter</artifactId>
             <version>${project.version}</version>
         </dependency>
+
+        <dependency>
+            <groupId>com.aa03.index12306</groupId>
+            <artifactId>index12306-user-spring-boot-starter</artifactId>
+            <version>${project.version}</version>
+        </dependency>
     </dependencies>
 
     <properties>
