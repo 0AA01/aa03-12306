@@ -1,6 +1,8 @@
 package com.aa03.index12306.biz.userservice.service.impl;
 
-import com.aa03.index12306.biz.userservice.dao.entity.UserDo;
+import com.aa03.index12306.biz.userservice.dao.entity.UserDO;
+import com.aa03.index12306.biz.userservice.dao.entity.UserDeletionDO;
+import com.aa03.index12306.biz.userservice.dao.mapper.UserDeletionMapper;
 import com.aa03.index12306.biz.userservice.dao.mapper.UserMapper;
 import com.aa03.index12306.biz.userservice.dto.resp.UserQueryActualRespDTO;
 import com.aa03.index12306.biz.userservice.dto.resp.UserQueryRespDTO;
@@ -38,5 +40,15 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, UserDO> implements 
     @Override
     public UserQueryActualRespDTO queryActualUserByUsername(String username) {
         return BeanUtil.convert(queryUserByUsername(username), UserQueryActualRespDTO.class);
+    }
+
+    @Override
+    public Integer queryUserDeletionNum(Integer idType, String idCard) {
+        LambdaQueryWrapper<UserDeletionDO> queryWrapper = Wrappers.lambdaQuery(UserDeletionDO.class)
+                .eq(UserDeletionDO::getIdType, idType)
+                .eq(UserDeletionDO::getIdCard, idCard);
+        // TODO 此处应该先查缓存
+        Long deletionCount = userDeletionMapper.selectCount(queryWrapper);
+        return Optional.ofNullable(deletionCount).map(Long::intValue).orElse(0);
     }
 }
