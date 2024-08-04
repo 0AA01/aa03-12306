@@ -1,5 +1,3 @@
-
-
 package com.aa03.index12306.biz.ticketservice.common.enums;
 
 import cn.hutool.core.collection.ListUtil;
@@ -14,7 +12,6 @@ import static com.aa03.index12306.biz.ticketservice.common.enums.VehicleSeatType
 
 /**
  * 交通工具类型
-
  */
 @RequiredArgsConstructor
 public enum VehicleTypeEnum {
