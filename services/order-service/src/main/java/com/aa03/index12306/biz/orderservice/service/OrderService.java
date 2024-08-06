@@ -3,7 +3,9 @@ package com.aa03.index12306.biz.orderservice.service;
 import com.aa03.index12306.biz.orderservice.dto.req.CancelTicketOrderReqDTO;
 import com.aa03.index12306.biz.orderservice.dto.req.TicketOrderCreateReqDTO;
 import com.aa03.index12306.biz.orderservice.dto.req.TicketOrderPageQueryReqDTO;
+import com.aa03.index12306.biz.orderservice.dto.req.TicketOrderSelfPageQueryReqDTO;
 import com.aa03.index12306.biz.orderservice.dto.resp.TicketOrderDetailRespDTO;
+import com.aa03.index12306.biz.orderservice.dto.resp.TicketOrderDetailSelfRespDTO;
 import com.aa03.index12306.framework.starter.convention.page.PageResponse;
 
 /**
@@ -26,6 +28,14 @@ public interface OrderService {
      * @return 订单分页详情
      */
     PageResponse<TicketOrderDetailRespDTO> pageTicketOrder(TicketOrderPageQueryReqDTO requestParam);
+
+    /**
+     * 查询本人车票订单
+     *
+     * @param requestParam 请求参数
+     * @return 本人车票订单集合
+     */
+    PageResponse<TicketOrderDetailSelfRespDTO> pageSelfTicketOrder(TicketOrderSelfPageQueryReqDTO requestParam);
 
     /**
      * 创建火车票订单

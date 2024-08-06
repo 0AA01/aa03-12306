@@ -10,14 +10,14 @@ import com.aa03.index12306.biz.orderservice.dao.entity.OrderItemDO;
 import com.aa03.index12306.biz.orderservice.dao.entity.OrderItemPassengerDO;
 import com.aa03.index12306.biz.orderservice.dao.mapper.OrderItemMapper;
 import com.aa03.index12306.biz.orderservice.dao.mapper.OrderMapper;
-import com.aa03.index12306.biz.orderservice.dto.req.CancelTicketOrderReqDTO;
-import com.aa03.index12306.biz.orderservice.dto.req.TicketOrderCreateReqDTO;
-import com.aa03.index12306.biz.orderservice.dto.req.TicketOrderItemCreateReqDTO;
-import com.aa03.index12306.biz.orderservice.dto.req.TicketOrderPageQueryReqDTO;
+import com.aa03.index12306.biz.orderservice.dto.req.*;
 import com.aa03.index12306.biz.orderservice.dto.resp.TicketOrderDetailRespDTO;
+import com.aa03.index12306.biz.orderservice.dto.resp.TicketOrderDetailSelfRespDTO;
 import com.aa03.index12306.biz.orderservice.dto.resp.TicketOrderPassengerDetailRespDTO;
 import com.aa03.index12306.biz.orderservice.mq.event.DelayCloseOrderEvent;
 import com.aa03.index12306.biz.orderservice.mq.produce.DelayCloseOrderSendProduce;
+import com.aa03.index12306.biz.orderservice.remote.UserRemoteService;
+import com.aa03.index12306.biz.orderservice.remote.dto.UserQueryActualRespDTO;
 import com.aa03.index12306.biz.orderservice.service.OrderItemService;
 import com.aa03.index12306.biz.orderservice.service.OrderPassengerRelationService;
 import com.aa03.index12306.biz.orderservice.service.OrderService;
@@ -26,7 +26,9 @@ import com.aa03.index12306.framework.starter.common.toolkit.BeanUtil;
 import com.aa03.index12306.framework.starter.convention.exception.ClientException;
 import com.aa03.index12306.framework.starter.convention.exception.ServiceException;
 import com.aa03.index12306.framework.starter.convention.page.PageResponse;
+import com.aa03.index12306.framework.starter.convention.result.Result;
 import com.aa03.index12306.framework.starter.database.toolkit.PageUtil;
+import com.aa03.index12306.frameworks.starter.user.core.UserContext;
 import com.alibaba.fastjson2.JSON;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.core.conditions.update.LambdaUpdateWrapper;
@@ -59,6 +61,7 @@ public class OrderServiceImpl implements OrderService {
     private final OrderPassengerRelationService orderPassengerRelationService;
     private final DelayCloseOrderSendProduce delayCloseOrderSendProduce;
     private final RedissonClient redissonClient;
+    private final UserRemoteService userRemoteService;
 
     @Override
     public TicketOrderDetailRespDTO queryTicketOrderByOrderSn(String orderSn) {
@@ -87,6 +90,27 @@ public class OrderServiceImpl implements OrderService {
             List<OrderItemDO> orderItemDOList = orderItemMapper.selectList(orderItemQueryWrapper);
             result.setPassengerDetails(BeanUtil.convert(orderItemDOList, TicketOrderPassengerDetailRespDTO.class));
             return result;
+        });
+    }
+
+    @Override
+    public PageResponse<TicketOrderDetailSelfRespDTO> pageSelfTicketOrder(TicketOrderSelfPageQueryReqDTO requestParam) {
+        Result<UserQueryActualRespDTO> userActualResp = userRemoteService.queryActualUserByUsername(UserContext.getUsername());
+        LambdaQueryWrapper<OrderItemPassengerDO> queryWrapper = Wrappers.lambdaQuery(OrderItemPassengerDO.class)
+                .eq(OrderItemPassengerDO::getIdCard, userActualResp.getData().getIdCard())
+                .orderByDesc(OrderItemPassengerDO::getCreateTime);
+        IPage<OrderItemPassengerDO> orderItemPassengerPage = orderPassengerRelationService.page(PageUtil.convert(requestParam), queryWrapper);
+        return PageUtil.convert(orderItemPassengerPage, each -> {
+            LambdaQueryWrapper<OrderDO> orderQueryWrapper = Wrappers.lambdaQuery(OrderDO.class)
+                    .eq(OrderDO::getOrderSn, each.getOrderSn());
+            OrderDO orderDO = orderMapper.selectOne(orderQueryWrapper);
+            LambdaQueryWrapper<OrderItemDO> orderItemQueryWrapper = Wrappers.lambdaQuery(OrderItemDO.class)
+                    .eq(OrderItemDO::getOrderSn, each.getOrderSn())
+                    .eq(OrderItemDO::getIdCard, each.getIdCard());
+            OrderItemDO orderItemDO = orderItemMapper.selectOne(orderItemQueryWrapper);
+            TicketOrderDetailSelfRespDTO actualResult = BeanUtil.convert(orderDO, TicketOrderDetailSelfRespDTO.class);
+            BeanUtil.convertIgnoreNullAndBlank(orderItemDO, actualResult);
+            return actualResult;
         });
     }
 
