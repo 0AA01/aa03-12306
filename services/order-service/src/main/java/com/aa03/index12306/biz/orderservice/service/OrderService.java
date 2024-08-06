@@ -1,5 +1,6 @@
 package com.aa03.index12306.biz.orderservice.service;
 
+import com.aa03.index12306.biz.orderservice.dto.req.CancelTicketOrderReqDTO;
 import com.aa03.index12306.biz.orderservice.dto.req.TicketOrderCreateReqDTO;
 
 /**
@@ -15,4 +16,10 @@ public interface OrderService {
      */
     String createTicketOrder(TicketOrderCreateReqDTO requestParam);
 
+    /**
+     * 取消火车票订单
+     *
+     * @param requestParam 取消火车票订单入参
+     */
+    boolean cancelTickOrder(CancelTicketOrderReqDTO requestParam);
 }

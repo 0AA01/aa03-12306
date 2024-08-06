@@ -1,5 +1,6 @@
 package com.aa03.index12306.biz.orderservice.controller;
 
+import com.aa03.index12306.biz.orderservice.dto.req.CancelTicketOrderReqDTO;
 import com.aa03.index12306.biz.orderservice.dto.req.TicketOrderCreateReqDTO;
 import com.aa03.index12306.biz.orderservice.service.OrderService;
 import com.aa03.index12306.framework.starter.convention.result.Result;
@@ -24,5 +25,14 @@ public class TicketOrderController {
     @PostMapping("/api/order-service/order/ticket/create")
     public Result<String> createTicketOrder(@RequestBody TicketOrderCreateReqDTO requestParam) {
         return Results.success(orderService.createTicketOrder(requestParam));
+    }
+
+
+    /**
+     * 车票订单取消
+     */
+    @PostMapping("/api/order-service/order/ticket/cancel")
+    public Result<Boolean> cancelTickOrder(@RequestBody CancelTicketOrderReqDTO requestParam) {
+        return Results.success(orderService.cancelTickOrder(requestParam));
     }
 }
