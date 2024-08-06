@@ -1,5 +1,6 @@
 package com.aa03.index12306.biz.orderservice.service.impl;
 
+import cn.hutool.core.collection.ListUtil;
 import cn.hutool.core.text.StrBuilder;
 import com.aa03.index12306.biz.orderservice.common.enums.OrderCanalErrorCodeEnum;
 import com.aa03.index12306.biz.orderservice.common.enums.OrderItemStatusEnum;
@@ -12,6 +13,7 @@ import com.aa03.index12306.biz.orderservice.dao.mapper.OrderMapper;
 import com.aa03.index12306.biz.orderservice.dto.req.CancelTicketOrderReqDTO;
 import com.aa03.index12306.biz.orderservice.dto.req.TicketOrderCreateReqDTO;
 import com.aa03.index12306.biz.orderservice.dto.req.TicketOrderItemCreateReqDTO;
+import com.aa03.index12306.biz.orderservice.dto.req.TicketOrderPageQueryReqDTO;
 import com.aa03.index12306.biz.orderservice.dto.resp.TicketOrderDetailRespDTO;
 import com.aa03.index12306.biz.orderservice.dto.resp.TicketOrderPassengerDetailRespDTO;
 import com.aa03.index12306.biz.orderservice.mq.event.DelayCloseOrderEvent;
@@ -23,9 +25,12 @@ import com.aa03.index12306.biz.orderservice.service.orderid.OrderIdGeneratorMana
 import com.aa03.index12306.framework.starter.common.toolkit.BeanUtil;
 import com.aa03.index12306.framework.starter.convention.exception.ClientException;
 import com.aa03.index12306.framework.starter.convention.exception.ServiceException;
+import com.aa03.index12306.framework.starter.convention.page.PageResponse;
+import com.aa03.index12306.framework.starter.database.toolkit.PageUtil;
 import com.alibaba.fastjson2.JSON;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.core.conditions.update.LambdaUpdateWrapper;
+import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -66,6 +71,23 @@ public class OrderServiceImpl implements OrderService {
         List<OrderItemDO> orderItemDOList = orderItemMapper.selectList(orderItemQueryWrapper);
         result.setPassengerDetails(BeanUtil.convert(orderItemDOList, TicketOrderPassengerDetailRespDTO.class));
         return result;
+    }
+
+    @Override
+    public PageResponse<TicketOrderDetailRespDTO> pageTicketOrder(TicketOrderPageQueryReqDTO requestParam) {
+        LambdaQueryWrapper<OrderDO> queryWrapper = Wrappers.lambdaQuery(OrderDO.class)
+                .eq(OrderDO::getUserId, requestParam.getUserId())
+                .in(OrderDO::getStatus, buildOrderStatusList(requestParam))
+                .orderByDesc(OrderDO::getOrderTime);
+        IPage<OrderDO> orderPage = orderMapper.selectPage(PageUtil.convert(requestParam), queryWrapper);
+        return PageUtil.convert(orderPage, each -> {
+            TicketOrderDetailRespDTO result = BeanUtil.convert(each, TicketOrderDetailRespDTO.class);
+            LambdaQueryWrapper<OrderItemDO> orderItemQueryWrapper = Wrappers.lambdaQuery(OrderItemDO.class)
+                    .eq(OrderItemDO::getOrderSn, each.getOrderSn());
+            List<OrderItemDO> orderItemDOList = orderItemMapper.selectList(orderItemQueryWrapper);
+            result.setPassengerDetails(BeanUtil.convert(orderItemDOList, TicketOrderPassengerDetailRespDTO.class));
+            return result;
+        });
     }
 
     @Transactional(rollbackFor = Exception.class)
@@ -191,5 +213,23 @@ public class OrderServiceImpl implements OrderService {
             lock.unlock();
         }
         return true;
+    }
+
+    private List<Integer> buildOrderStatusList(TicketOrderPageQueryReqDTO requestParam) {
+        List<Integer> result = new ArrayList<>();
+        switch (requestParam.getStatusType()) {
+            case 0 -> result = ListUtil.of(
+                    OrderStatusEnum.PENDING_PAYMENT.getStatus()
+            );
+            case 1 -> result = ListUtil.of(
+                    OrderStatusEnum.ALREADY_PAID.getStatus(),
+                    OrderStatusEnum.PARTIAL_REFUND.getStatus(),
+                    OrderStatusEnum.FULL_REFUND.getStatus()
+            );
+            case 2 -> result = ListUtil.of(
+                    OrderStatusEnum.COMPLETED.getStatus()
+            );
+        }
+        return result;
     }
 }
