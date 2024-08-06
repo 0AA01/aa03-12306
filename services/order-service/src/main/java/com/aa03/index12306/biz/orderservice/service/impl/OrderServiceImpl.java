@@ -12,12 +12,15 @@ import com.aa03.index12306.biz.orderservice.dao.mapper.OrderMapper;
 import com.aa03.index12306.biz.orderservice.dto.req.CancelTicketOrderReqDTO;
 import com.aa03.index12306.biz.orderservice.dto.req.TicketOrderCreateReqDTO;
 import com.aa03.index12306.biz.orderservice.dto.req.TicketOrderItemCreateReqDTO;
+import com.aa03.index12306.biz.orderservice.dto.resp.TicketOrderDetailRespDTO;
+import com.aa03.index12306.biz.orderservice.dto.resp.TicketOrderPassengerDetailRespDTO;
 import com.aa03.index12306.biz.orderservice.mq.event.DelayCloseOrderEvent;
 import com.aa03.index12306.biz.orderservice.mq.produce.DelayCloseOrderSendProduce;
 import com.aa03.index12306.biz.orderservice.service.OrderItemService;
 import com.aa03.index12306.biz.orderservice.service.OrderPassengerRelationService;
 import com.aa03.index12306.biz.orderservice.service.OrderService;
 import com.aa03.index12306.biz.orderservice.service.orderid.OrderIdGeneratorManager;
+import com.aa03.index12306.framework.starter.common.toolkit.BeanUtil;
 import com.aa03.index12306.framework.starter.convention.exception.ClientException;
 import com.aa03.index12306.framework.starter.convention.exception.ServiceException;
 import com.alibaba.fastjson2.JSON;
@@ -51,6 +54,19 @@ public class OrderServiceImpl implements OrderService {
     private final OrderPassengerRelationService orderPassengerRelationService;
     private final DelayCloseOrderSendProduce delayCloseOrderSendProduce;
     private final RedissonClient redissonClient;
+
+    @Override
+    public TicketOrderDetailRespDTO queryTicketOrderByOrderSn(String orderSn) {
+        LambdaQueryWrapper<OrderDO> queryWrapper = Wrappers.lambdaQuery(OrderDO.class)
+                .eq(OrderDO::getOrderSn, orderSn);
+        OrderDO orderDO = orderMapper.selectOne(queryWrapper);
+        TicketOrderDetailRespDTO result = BeanUtil.convert(orderDO, TicketOrderDetailRespDTO.class);
+        LambdaQueryWrapper<OrderItemDO> orderItemQueryWrapper = Wrappers.lambdaQuery(OrderItemDO.class)
+                .eq(OrderItemDO::getOrderSn, orderSn);
+        List<OrderItemDO> orderItemDOList = orderItemMapper.selectList(orderItemQueryWrapper);
+        result.setPassengerDetails(BeanUtil.convert(orderItemDOList, TicketOrderPassengerDetailRespDTO.class));
+        return result;
+    }
 
     @Transactional(rollbackFor = Exception.class)
     @Override
