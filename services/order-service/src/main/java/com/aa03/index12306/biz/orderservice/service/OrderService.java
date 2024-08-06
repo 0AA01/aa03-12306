@@ -17,6 +17,13 @@ public interface OrderService {
     String createTicketOrder(TicketOrderCreateReqDTO requestParam);
 
     /**
+     * 关闭火车票订单
+     *
+     * @param requestParam 关闭火车票订单入参
+     */
+    Boolean closeTickOrder(CancelTicketOrderReqDTO requestParam);
+
+    /**
      * 取消火车票订单
      *
      * @param requestParam 取消火车票订单入参
