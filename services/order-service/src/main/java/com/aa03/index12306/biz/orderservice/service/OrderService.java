@@ -1,11 +1,13 @@
 package com.aa03.index12306.biz.orderservice.service;
 
+import com.aa03.index12306.biz.orderservice.dto.domain.OrderStatusReversalDTO;
 import com.aa03.index12306.biz.orderservice.dto.req.CancelTicketOrderReqDTO;
 import com.aa03.index12306.biz.orderservice.dto.req.TicketOrderCreateReqDTO;
 import com.aa03.index12306.biz.orderservice.dto.req.TicketOrderPageQueryReqDTO;
 import com.aa03.index12306.biz.orderservice.dto.req.TicketOrderSelfPageQueryReqDTO;
 import com.aa03.index12306.biz.orderservice.dto.resp.TicketOrderDetailRespDTO;
 import com.aa03.index12306.biz.orderservice.dto.resp.TicketOrderDetailSelfRespDTO;
+import com.aa03.index12306.biz.orderservice.mq.event.PayResultCallbackOrderEvent;
 import com.aa03.index12306.framework.starter.convention.page.PageResponse;
 
 /**
@@ -58,4 +60,18 @@ public interface OrderService {
      * @param requestParam 取消火车票订单入参
      */
     boolean cancelTickOrder(CancelTicketOrderReqDTO requestParam);
+
+    /**
+     * 订单状态反转
+     *
+     * @param requestParam 请求参数
+     */
+    void statusReversal(OrderStatusReversalDTO requestParam);
+
+    /**
+     * 支付结果回调订单
+     *
+     * @param requestParam 请求参数
+     */
+    void payCallbackOrder(PayResultCallbackOrderEvent requestParam);
 }

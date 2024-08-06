@@ -10,11 +10,13 @@ import com.aa03.index12306.biz.orderservice.dao.entity.OrderItemDO;
 import com.aa03.index12306.biz.orderservice.dao.entity.OrderItemPassengerDO;
 import com.aa03.index12306.biz.orderservice.dao.mapper.OrderItemMapper;
 import com.aa03.index12306.biz.orderservice.dao.mapper.OrderMapper;
+import com.aa03.index12306.biz.orderservice.dto.domain.OrderStatusReversalDTO;
 import com.aa03.index12306.biz.orderservice.dto.req.*;
 import com.aa03.index12306.biz.orderservice.dto.resp.TicketOrderDetailRespDTO;
 import com.aa03.index12306.biz.orderservice.dto.resp.TicketOrderDetailSelfRespDTO;
 import com.aa03.index12306.biz.orderservice.dto.resp.TicketOrderPassengerDetailRespDTO;
 import com.aa03.index12306.biz.orderservice.mq.event.DelayCloseOrderEvent;
+import com.aa03.index12306.biz.orderservice.mq.event.PayResultCallbackOrderEvent;
 import com.aa03.index12306.biz.orderservice.mq.produce.DelayCloseOrderSendProduce;
 import com.aa03.index12306.biz.orderservice.remote.UserRemoteService;
 import com.aa03.index12306.biz.orderservice.remote.dto.UserQueryActualRespDTO;
@@ -237,6 +239,55 @@ public class OrderServiceImpl implements OrderService {
             lock.unlock();
         }
         return true;
+    }
+
+    @Override
+    public void statusReversal(OrderStatusReversalDTO requestParam) {
+        LambdaQueryWrapper<OrderDO> queryWrapper = Wrappers.lambdaQuery(OrderDO.class)
+                .eq(OrderDO::getOrderSn, requestParam.getOrderSn());
+        OrderDO orderDO = orderMapper.selectOne(queryWrapper);
+        if (orderDO == null) {
+            throw new ServiceException(OrderCanalErrorCodeEnum.ORDER_CANAL_UNKNOWN_ERROR);
+        } else if (orderDO.getStatus() != OrderStatusEnum.PENDING_PAYMENT.getStatus()) {
+            throw new ServiceException(OrderCanalErrorCodeEnum.ORDER_CANAL_STATUS_ERROR);
+        }
+        RLock lock = redissonClient.getLock(StrBuilder.create("order:status-reversal:order_sn_").append(requestParam.getOrderSn()).toString());
+        if (!lock.tryLock()) {
+            log.warn("订单重复修改状态，状态反转请求参数：{}", JSON.toJSONString(requestParam));
+        }
+        try {
+            OrderDO updateOrderDO = new OrderDO();
+            updateOrderDO.setStatus(requestParam.getOrderStatus());
+            LambdaUpdateWrapper<OrderDO> updateWrapper = Wrappers.lambdaUpdate(OrderDO.class)
+                    .eq(OrderDO::getOrderSn, requestParam.getOrderSn());
+            int updateResult = orderMapper.update(updateOrderDO, updateWrapper);
+            if (updateResult <= 0) {
+                throw new ServiceException(OrderCanalErrorCodeEnum.ORDER_STATUS_REVERSAL_ERROR);
+            }
+            OrderItemDO orderItemDO = new OrderItemDO();
+            orderItemDO.setStatus(requestParam.getOrderItemStatus());
+            LambdaUpdateWrapper<OrderItemDO> orderItemUpdateWrapper = Wrappers.lambdaUpdate(OrderItemDO.class)
+                    .eq(OrderItemDO::getOrderSn, requestParam.getOrderSn());
+            int orderItemUpdateResult = orderItemMapper.update(orderItemDO, orderItemUpdateWrapper);
+            if (orderItemUpdateResult <= 0) {
+                throw new ServiceException(OrderCanalErrorCodeEnum.ORDER_STATUS_REVERSAL_ERROR);
+            }
+        } finally {
+            lock.unlock();
+        }
+    }
+
+    @Override
+    public void payCallbackOrder(PayResultCallbackOrderEvent requestParam) {
+        OrderDO updateOrderDO = new OrderDO();
+        updateOrderDO.setPayTime(requestParam.getGmtPayment());
+        updateOrderDO.setPayType(requestParam.getChannel());
+        LambdaUpdateWrapper<OrderDO> updateWrapper = Wrappers.lambdaUpdate(OrderDO.class)
+                .eq(OrderDO::getOrderSn, requestParam.getOrderSn());
+        int updateResult = orderMapper.update(updateOrderDO, updateWrapper);
+        if (updateResult <= 0) {
+            throw new ServiceException(OrderCanalErrorCodeEnum.ORDER_STATUS_REVERSAL_ERROR);
+        }
     }
 
     private List<Integer> buildOrderStatusList(TicketOrderPageQueryReqDTO requestParam) {
