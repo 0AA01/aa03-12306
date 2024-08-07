@@ -57,12 +57,10 @@ public final class TrainSeatTypeSelector {
         if (seatTypeMap.size() > 1) {
             List<Future<List<TrainPurchaseTicketRespDTO>>> futureResults = new ArrayList<>();
             seatTypeMap.forEach((seatType, passengerSeatDetails) -> {
-                // 线程池参数如何设置？详情查看：https://nageoffer.com/12306/question
                 Future<List<TrainPurchaseTicketRespDTO>> completableFuture = selectSeatThreadPoolExecutor
                         .submit(() -> distributeSeats(trainType, seatType, requestParam, passengerSeatDetails));
                 futureResults.add(completableFuture);
             });
-            // 并行流极端情况下有坑，详情参考：https://nageoffer.com/12306/question
             futureResults.parallelStream().forEach(completableFuture -> {
                 try {
                     actualResult.addAll(completableFuture.get());
@@ -124,6 +122,7 @@ public final class TrainSeatTypeSelector {
     }
 
     private List<TrainPurchaseTicketRespDTO> distributeSeats(Integer trainType, Integer seatType, PurchaseTicketReqDTO requestParam, List<PurchaseTicketPassengerDetailDTO> passengerSeatDetails) {
+        // （列车编号 + 座位类型）
         String buildStrategyKey = VehicleTypeEnum.findNameByCode(trainType) + VehicleSeatTypeEnum.findNameByCode(seatType);
         SelectSeatDTO selectSeatDTO = SelectSeatDTO.builder()
                 .seatType(seatType)
@@ -131,6 +130,7 @@ public final class TrainSeatTypeSelector {
                 .requestParam(requestParam)
                 .build();
         try {
+            // 使用策略设计模式
             return abstractStrategyChoose.chooseAndExecuteResp(buildStrategyKey, selectSeatDTO);
         } catch (ServiceException ex) {
             throw new ServiceException("当前车次列车类型暂未适配，请购买G35或G39车次");

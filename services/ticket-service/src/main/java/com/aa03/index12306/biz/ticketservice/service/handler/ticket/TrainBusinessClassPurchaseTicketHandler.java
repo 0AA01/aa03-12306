@@ -47,8 +47,11 @@ public class TrainBusinessClassPurchaseTicketHandler extends AbstractTrainPurcha
         String trainId = requestParam.getRequestParam().getTrainId();
         String departure = requestParam.getRequestParam().getDeparture();
         String arrival = requestParam.getRequestParam().getArrival();
+        // 需要购买车票的乘客
         List<PurchaseTicketPassengerDetailDTO> passengerSeatDetails = requestParam.getPassengerSeatDetails();
+        // 查询列车有余票的车厢号集合
         List<String> trainCarriageList = seatService.listUsableCarriageNumber(trainId, requestParam.getSeatType(), departure, arrival);
+        // 获取列车车厢余票集合
         List<Integer> trainStationCarriageRemainingTicket = seatService.listSeatRemainingTicket(trainId, departure, arrival, trainCarriageList);
         int remainingTicketSum = trainStationCarriageRemainingTicket.stream().mapToInt(Integer::intValue).sum();
         if (remainingTicketSum < passengerSeatDetails.size()) {
@@ -73,11 +76,14 @@ public class TrainBusinessClassPurchaseTicketHandler extends AbstractTrainPurcha
         TrainSeatBaseDTO trainSeatBaseDTO = buildTrainSeatBaseDTO(requestParam);
         int chooseSeatSize = trainSeatBaseDTO.getChooseSeatList().size();
         List<TrainPurchaseTicketRespDTO> actualResult = Lists.newArrayListWithCapacity(trainSeatBaseDTO.getPassengerSeatDetails().size());
+        // 获取验证座位实体类
         BitMapCheckSeat instance = BitMapCheckSeatStatusFactory.getInstance(TRAIN_BUSINESS);
         HashMap<String, List<Pair<Integer, Integer>>> carriagesSeatMap = new HashMap<>(4);
         int passengersNumber = trainSeatBaseDTO.getPassengerSeatDetails().size();
         for (int i = 0; i < trainStationCarriageRemainingTicket.size(); i++) {
+            // 获取车厢号
             String carriagesNumber = trainCarriageList.get(i);
+            // 根据车厢号获取可用的座位集合
             List<String> listAvailableSeat = seatService.listAvailableSeat(trainSeatBaseDTO.getTrainId(), carriagesNumber, requestParam.getSeatType(), trainSeatBaseDTO.getDeparture(), trainSeatBaseDTO.getArrival());
             int[][] actualSeats = new int[2][3];
             for (int j = 1; j < 3; j++) {
@@ -85,19 +91,24 @@ public class TrainBusinessClassPurchaseTicketHandler extends AbstractTrainPurcha
                     actualSeats[j - 1][k - 1] = listAvailableSeat.contains("0" + j + SeatNumberUtil.convert(0, k)) ? 0 : 1;
                 }
             }
+            // 统计空余座位
             List<Pair<Integer, Integer>> vacantSeatList = CarriageVacantSeatCalculateUtil.buildCarriageVacantSeatList2(actualSeats, 2, 3);
+            // 查看选择座位是否存在
             boolean isExists = instance.checkChooseSeat(trainSeatBaseDTO.getChooseSeatList(), actualSeats, SEAT_Y_INT);
             long vacantSeatCount = vacantSeatList.size();
             List<Pair<Integer, Integer>> sureSeatList = new ArrayList<>();
             List<String> selectSeats = Lists.newArrayListWithCapacity(passengersNumber);
             boolean flag = false;
+            // 指定座位存在，并且该车厢余票数量 >= 购票人数量
             if (isExists && vacantSeatCount >= passengersNumber) {
                 Iterator<Pair<Integer, Integer>> pairIterator = vacantSeatList.iterator();
                 for (int i1 = 0; i1 < chooseSeatSize; i1++) {
+                    // 选择特定座位信息数量为1
                     if (chooseSeatSize == 1) {
                         String chooseSeat = trainSeatBaseDTO.getChooseSeatList().get(i1);
                         int seatX = Integer.parseInt(chooseSeat.substring(1));
                         int seatY = SEAT_Y_INT.get(chooseSeat.charAt(0));
+                        // 选择该座位，删除该座位为空的信息
                         if (actualSeats[seatX][seatY] == 0) {
                             sureSeatList.add(new Pair<>(seatX, seatY));
                             while (pairIterator.hasNext()) {
@@ -109,6 +120,7 @@ public class TrainBusinessClassPurchaseTicketHandler extends AbstractTrainPurcha
                             }
                         } else {
                             if (actualSeats[1][seatY] == 0) {
+                                // 选择该座位，删除该座位为空的信息
                                 sureSeatList.add(new Pair<>(1, seatY));
                                 while (pairIterator.hasNext()) {
                                     Pair<Integer, Integer> pair = pairIterator.next();
@@ -126,6 +138,7 @@ public class TrainBusinessClassPurchaseTicketHandler extends AbstractTrainPurcha
                         int seatX = Integer.parseInt(chooseSeat.substring(1));
                         int seatY = SEAT_Y_INT.get(chooseSeat.charAt(0));
                         if (actualSeats[seatX][seatY] == 0) {
+                            // 选择该座位，删除该座位为空的信息
                             sureSeatList.add(new Pair<>(seatX, seatY));
                             while (pairIterator.hasNext()) {
                                 Pair<Integer, Integer> pair = pairIterator.next();
@@ -137,16 +150,21 @@ public class TrainBusinessClassPurchaseTicketHandler extends AbstractTrainPurcha
                         }
                     }
                 }
+                // 如果车厢能满足要求或者不能满足要求并且是最后一个车厢，就执行下面语句，否则continue
                 if (flag && i < trainStationCarriageRemainingTicket.size() - 1) {
                     continue;
                 }
+                // 已选择座位的数据 != 所有乘客数量
                 if (sureSeatList.size() != passengersNumber) {
                     int needSeatSize = passengersNumber - sureSeatList.size();
+                    // 直接从剩余座位里面选择差值
                     sureSeatList.addAll(vacantSeatList.subList(0, needSeatSize));
                 }
+                // 将所有选择的座位记录下来
                 for (Pair<Integer, Integer> each : sureSeatList) {
                     selectSeats.add("0" + (each.getKey() + 1) + SeatNumberUtil.convert(0, (each.getValue() + 1)));
                 }
+                // 将选择的座位信息和乘车对应后，返回
                 AtomicInteger countNum = new AtomicInteger(0);
                 for (String selectSeat : selectSeats) {
                     TrainPurchaseTicketRespDTO result = new TrainPurchaseTicketRespDTO();
@@ -160,10 +178,13 @@ public class TrainBusinessClassPurchaseTicketHandler extends AbstractTrainPurcha
                 return new Pair<>(actualResult, Boolean.TRUE);
             } else {
                 if (i < trainStationCarriageRemainingTicket.size()) {
+                    // 将每个车厢的余票信息记录下来
                     if (vacantSeatCount > 0) {
                         carriagesSeatMap.put(carriagesNumber, vacantSeatList);
                     }
+                    // 只有最后一个车厢也不满足购票条件，才选择分车厢购票
                     if (i == trainStationCarriageRemainingTicket.size() - 1) {
+                        // 找到一个车厢剩余座位数量 >= 乘客数量
                         Pair<String, List<Pair<Integer, Integer>>> findSureCarriage = null;
                         for (Map.Entry<String, List<Pair<Integer, Integer>>> entry : carriagesSeatMap.entrySet()) {
                             if (entry.getValue().size() >= passengersNumber) {
@@ -172,6 +193,7 @@ public class TrainBusinessClassPurchaseTicketHandler extends AbstractTrainPurcha
                             }
                         }
                         if (null != findSureCarriage) {
+                            // 直接选择这个车厢的剩余的座位数量
                             sureSeatList = findSureCarriage.getValue().subList(0, passengersNumber);
                             for (Pair<Integer, Integer> each : sureSeatList) {
                                 selectSeats.add("0" + (each.getKey() + 1) + SeatNumberUtil.convert(0, each.getValue() + 1));
@@ -189,6 +211,7 @@ public class TrainBusinessClassPurchaseTicketHandler extends AbstractTrainPurcha
                         } else {
                             int sureSeatListSize = 0;
                             AtomicInteger countNum = new AtomicInteger(0);
+                            // 依次选择每个车厢的剩余数量，直到选满
                             for (Map.Entry<String, List<Pair<Integer, Integer>>> entry : carriagesSeatMap.entrySet()) {
                                 if (sureSeatListSize < passengersNumber) {
                                     if (sureSeatListSize + entry.getValue().size() < passengersNumber) {
