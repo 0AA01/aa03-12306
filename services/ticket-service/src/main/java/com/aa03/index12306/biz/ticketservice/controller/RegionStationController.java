@@ -29,7 +29,6 @@ public class RegionStationController {
         return Results.success(regionStationService.listRegionStation(requestParam));
     }
 
-
     /**
      * 查询车站站点集合信息
      */

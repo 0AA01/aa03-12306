@@ -1,5 +1,3 @@
-
-
 package com.aa03.index12306.biz.ticketservice.common.enums;
 
 import lombok.Getter;
@@ -10,7 +8,6 @@ import java.util.Objects;
 
 /**
  * 交通工具座位类型
-
  */
 @RequiredArgsConstructor
 public enum VehicleSeatTypeEnum {
